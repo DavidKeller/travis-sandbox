@@ -1,0 +1,12 @@
+sudo: false
+
+os:
+    - linux
+
+language:
+    - cpp
+
+script:
+    - make
+    - ./resolver ::1
+
