@@ -10,7 +10,8 @@ int main(int argc, char * argv[])
 
     boost::asio::io_service io_service;
     boost::asio::ip::udp::resolver r(io_service);
-    boost::asio::ip::udp::resolver::query q(argv[1], "1234");
+    boost::asio::ip::udp::resolver::query q(argv[1], "1234",
+                                            boost::asio::ip::udp::resolver::query::flags());
 
     boost::asio::ip::udp::resolver::iterator i = r.resolve(q);
 
