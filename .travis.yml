@@ -6,7 +6,16 @@ os:
 language:
     - cpp
 
+install:
+    # Build our own c++11 enabled boost.
+    - wget -qO- http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.bz2 | tar xj
+    - pushd boost_1_58_0 && ./bootstrap.sh --with-libraries=system
+    - ./b2 -q -j`nproc` variant=release link=shared threading=multi toolset=${CC} address-model=64
+    - export BOOST_ROOT="`pwd`"
+    - popd
+
 script:
-    - make
+    - mkdir build && cd build
+    - cmake .. && cmake --build .
     - ./resolver ::1
 
